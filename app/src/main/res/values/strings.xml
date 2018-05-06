@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ActivityCounter</string>
+    <string name="btn_new_activity">New Activity</string>
+    <string name="label_num_of_activities">Num of Activities: </string>
+</resources>
