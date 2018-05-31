@@ -1,1 +1,1 @@
-include ':app', ':activitycounter'
+include ':app', ':activity-counter'
