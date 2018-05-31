@@ -21,16 +21,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mActivityCounter = findViewById(R.id.txtActivityCounter);
 
-        mNewActivity = findViewById(R.id.btnNewActivity);
-        mNewActivity.setOnClickListener(openNew);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         int activities = ActivityCounter.getInstance().getCount();
         String label = getString(R.string.label_num_of_activities) + activities;
         mActivityCounter.setText(label);
+
+        mNewActivity = findViewById(R.id.btnNewActivity);
+        mNewActivity.setOnClickListener(openNew);
     }
 
     private final View.OnClickListener openNew = new View.OnClickListener() {
