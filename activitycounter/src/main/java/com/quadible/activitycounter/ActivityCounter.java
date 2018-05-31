@@ -3,11 +3,7 @@ package com.quadible.activitycounter;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
-import android.os.Debug;
 
-/**
- * Created by v.tsitsonis on 12/3/2018.
- */
 
 public class ActivityCounter {
 
@@ -37,18 +33,14 @@ public class ActivityCounter {
 
         private static final String BUNDLE_KEY_ACTIVITIES = "numberOfActivities";
 
-        private Object mLock = new Object();
-
         private int mActivities = 0;
 
         @Override
         public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-            synchronized (mLock) {
-                if (mActivities == 0 && savedInstanceState != null) {
-                    mActivities = savedInstanceState.getInt(BUNDLE_KEY_ACTIVITIES);
-                } else if (savedInstanceState == null) {
-                    mActivities++;
-                }
+            if (mActivities == 0 && savedInstanceState != null) {
+                mActivities = savedInstanceState.getInt(BUNDLE_KEY_ACTIVITIES);
+            } else if (savedInstanceState == null) {
+                mActivities++;
             }
         }
 
@@ -64,7 +56,9 @@ public class ActivityCounter {
 
         @Override
         public void onActivityPaused(Activity activity) {
-
+            if (activity.isFinishing()) {
+                mActivities--;
+            }
         }
 
         @Override
@@ -79,9 +73,7 @@ public class ActivityCounter {
 
         @Override
         public void onActivityDestroyed(Activity activity) {
-            synchronized (mLock) {
-                mActivities--;
-            }
+
         }
 
     }
